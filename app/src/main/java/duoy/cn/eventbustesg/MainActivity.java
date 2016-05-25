@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textView;
     private Button btn;
 
-    private String msg;
+    private int msg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,15 @@ public class MainActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
 
         textView = (TextView) findViewById(R.id.text);
-        msg = textView.getText().toString();
-        Log.i("test",textView.getText()+"@@@"+textView.length());
+        String t1 = textView.getText().toString();
+        msg = Integer.parseInt(t1);
+        //Log.i("test",textView.getText()+"@@@"+textView.length());
         btn = (Button) findViewById(R.id.btn);
     }
 
     public void second(View view){
 
-        if(msg.equals("1".trim())){
+        if(msg==1){
             Intent intent = new Intent(this,SecondActivity.class);
             startActivity(intent);
         }
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public void onTestEvent(TestEvent event){
         String i = event.getNum();
         textView.setText(i);
-        msg = textView.getText().toString();
+        String t2 = textView.getText().toString();
+        msg = Integer.parseInt(t2);
         Toast.makeText(this,i,Toast.LENGTH_LONG).show();
     }
 
